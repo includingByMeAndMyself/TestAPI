@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Timesheet.API.Models;
+using Timesheet.API.Services;
 
 namespace Timesheet.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        [HttpGet]
-        public string Get(string name)
+        [HttpPost]
+        public ActionResult<bool?> Login([FromBody] LoginRequest request)
         {
-            return name;
+            var authService = new AuthService();
+            return Ok(authService.Login(request.LastName));
         }
     }
 }
