@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Timesheet.API.Models;
+using Timesheet.API.ResourceModels;
 
 namespace Timesheet.API.Controllers
 {

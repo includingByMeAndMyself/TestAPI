@@ -25,6 +25,28 @@
 
             //assert
 
+            Assert.IsNotEmpty(UserSession.Sessions);
+            Assert.IsNotNull(UserSession.Sessions);
+            Assert.IsTrue(UserSession.Sessions.Contains(lastName));
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void Login_InvokeLoginTwiseForOneLastName_ShouldReturnTrue()
+        {
+            //arrange
+            var lastName = "Иванов";
+            var service = new AuthService();
+
+            //act
+
+            var result = service.Login(lastName);
+
+            //assert
+            
+            Assert.IsNotEmpty(UserSession.Sessions);
+            Assert.IsNotNull(UserSession.Sessions);
+            Assert.IsTrue(UserSession.Sessions.Contains(lastName));
             Assert.IsTrue(result);
         }
 
