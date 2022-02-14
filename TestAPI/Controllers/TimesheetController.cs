@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Timesheet.API.Models;
-using Timesheet.API.ResourceModels;
-using Timesheet.API.Services;
-using Timesheet.API.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Models;
 
 namespace Timesheet.API.Controllers
 {

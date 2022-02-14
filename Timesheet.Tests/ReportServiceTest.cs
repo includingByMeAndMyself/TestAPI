@@ -1,5 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using Timesheet.Application.Services;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Tests
 {
@@ -10,7 +12,9 @@ namespace Timesheet.Tests
         {
             //arrange
 
-            var service = new ReportService();
+            var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
+
+            var service = new ReportService(timesheetRepositoryMock.Object);
 
             var expectedLastName = "Иванов";
             var expectedTotal = 100m;
