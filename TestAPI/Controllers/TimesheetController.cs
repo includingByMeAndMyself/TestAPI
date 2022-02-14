@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Timesheet.API.Models;
 using Timesheet.API.ResourceModels;
 using Timesheet.API.Services;
 using Timesheet.API.Services.Interfaces;
@@ -12,19 +13,19 @@ namespace Timesheet.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class TimesheetController : Controller
     {
-        private readonly IAuthService _authService;
+        private readonly ITimesheetService _timesheetService;
 
-        public AuthController(IAuthService authService)
+        public TimesheetController(ITimesheetService timesheetService)
         {
-            _authService = authService;
+            _timesheetService = timesheetService;
         }
 
         [HttpPost]
-        public ActionResult<bool?> Login([FromBody] LoginRequest request)
+        public ActionResult<bool?> TrackTime(TimeLog request)
         {
-            return Ok(_authService.Login(request.LastName));
+            return Ok(_timesheetService.TrackTime(request));
         }
     }
 }

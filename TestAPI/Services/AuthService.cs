@@ -4,10 +4,11 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Timesheet.API.Services.Interfaces;
 
 namespace Timesheet.API.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         public AuthService()
         {

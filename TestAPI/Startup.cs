@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Timesheet.API.Services;
+using Timesheet.API.Services.Interfaces;
 
 namespace Timesheet.API
 {
@@ -26,6 +28,10 @@ namespace Timesheet.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<ITimesheetService, TimesheetService>();
+            //services.AddSingleton();
+            //services.AddScoped();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

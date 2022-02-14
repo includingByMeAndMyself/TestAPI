@@ -23,7 +23,8 @@ namespace Timesheet.Tests
             {
                 Date = new DateTime(),
                 WorkingHours = 1,
-                LastName = expectedLastName
+                LastName = expectedLastName,
+                Comment = ""
             };
 
             var service = new TimesheetService();
@@ -47,7 +48,8 @@ namespace Timesheet.Tests
             {
                 Date = new DateTime(),
                 WorkingHours = hours,
-                LastName = ""
+                LastName = "",
+                Comment = Guid.NewGuid().ToString()
             };
 
             var service = new TimesheetService();
@@ -77,7 +79,8 @@ namespace Timesheet.Tests
             {
                 Date = new DateTime(),
                 WorkingHours = hours,
-                LastName = lastName
+                LastName = lastName,
+                Comment = ""
             };
 
             var service = new TimesheetService();

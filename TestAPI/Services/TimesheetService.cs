@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Timesheet.API.Models;
+using Timesheet.API.Services.Interfaces;
 
 namespace Timesheet.API.Services
 {
-    public class TimesheetService
+    public class TimesheetService : ITimesheetService
     {
         public bool TrackTime(TimeLog timeLog)
         {
