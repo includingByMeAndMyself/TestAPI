@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.API.Models;
-using Timesheet.API.Services.Interfaces;
+﻿using System.Collections.Generic;
+using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Models;
 
-namespace Timesheet.API.Services
+namespace Timesheet.Application.Services
 {
     public class TimesheetService : ITimesheetService
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheet.API.Services.Interfaces
+namespace Timesheet.Domain.Interfaces
 {
     public interface IAuthService
     {

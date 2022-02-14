@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-using Timesheet.API.Models;
-using Timesheet.API.Services;
+﻿using NUnit.Framework;
+using Timesheet.Application.Services;
 
 namespace Timesheet.Tests
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.API.Services.Interfaces;
+﻿using System.Collections.Generic;
+using Timesheet.Domain.Interfaces;
 
-namespace Timesheet.API.Services
+namespace Timesheet.Application.Services
 {
     public class AuthService : IAuthService
     {

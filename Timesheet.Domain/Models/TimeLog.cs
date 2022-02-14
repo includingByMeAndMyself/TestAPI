@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheet.API.Models
+namespace Timesheet.Domain.Models
 {
     public class TimeLog
     {
