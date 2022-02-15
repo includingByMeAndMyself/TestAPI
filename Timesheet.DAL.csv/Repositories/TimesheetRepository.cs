@@ -9,5 +9,11 @@ namespace Timesheet.DAL.CSV.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public void Add(TimeLog timeLog)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
