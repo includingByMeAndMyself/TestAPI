@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Timesheet.Application.Services;
+using Timesheet.DAL.CSV.Repositories;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API
@@ -22,6 +23,7 @@ namespace Timesheet.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<ITimesheetRepository, TimesheetRepository>();
             services.AddTransient<ITimesheetService, TimesheetService>();
             //services.AddSingleton();
             //services.AddScoped();
