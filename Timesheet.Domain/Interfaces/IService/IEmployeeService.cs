@@ -7,7 +7,7 @@ using Timesheet.Domain.Models;
 
 namespace Timesheet.Domain.Interfaces.IService
 {
-    public interface IEmployeeServie
+    public interface IEmployeeService
     {
         public bool AddEmployee(StaffEmployee staffEmployee);
     }

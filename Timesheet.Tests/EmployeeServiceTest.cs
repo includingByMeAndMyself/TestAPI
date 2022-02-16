@@ -30,7 +30,7 @@ namespace Timesheet.Tests
             var employeeRepository = new Mock<IEmployeeRepository>();
             employeeRepository.Setup(x => x.AddEmployee(staffEmployee)).Verifiable();
 
-            var service = new EmployeeServie(employeeRepository.Object);
+            var service = new EmployeeService(employeeRepository.Object);
 
             //act
 
@@ -60,7 +60,7 @@ namespace Timesheet.Tests
 
             var employeeRepository = new Mock<IEmployeeRepository>();
 
-            var service = new EmployeeServie(employeeRepository.Object);
+            var service = new EmployeeService(employeeRepository.Object);
 
             //act
 

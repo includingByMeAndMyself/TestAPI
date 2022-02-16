@@ -4,11 +4,11 @@ using Timesheet.Domain.Models;
 
 namespace Timesheet.Application.Services
 {
-    public class EmployeeServie : IEmployeeServie
+    public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _emploeeyRepository;
 
-        public EmployeeServie(IEmployeeRepository emploeeyRepository)
+        public EmployeeService(IEmployeeRepository emploeeyRepository)
         {
             _emploeeyRepository = emploeeyRepository;
         }
