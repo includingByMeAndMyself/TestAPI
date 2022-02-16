@@ -1,6 +1,6 @@
 ﻿using Timesheet.Domain.Models;
 
-namespace Timesheet.Domain.Interfaces
+namespace Timesheet.Domain.Interfaces.IService
 {
     public interface ITimesheetService
     {

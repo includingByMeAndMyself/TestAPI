@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.DAL.CSV.Repositories

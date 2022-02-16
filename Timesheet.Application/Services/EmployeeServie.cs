@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.Domain.Interfaces;
+﻿using Timesheet.Domain.Interfaces.IRepository;
+using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.Application.Services
 {
     public class EmployeeServie : IEmployeeServie
     {
-        private readonly IEmploeeyRepository _emploeeyRepository;
+        private readonly IEmployeeRepository _emploeeyRepository;
 
-        public EmployeeServie(IEmploeeyRepository emploeeyRepository)
+        public EmployeeServie(IEmployeeRepository emploeeyRepository)
         {
             _emploeeyRepository = emploeeyRepository;
         }

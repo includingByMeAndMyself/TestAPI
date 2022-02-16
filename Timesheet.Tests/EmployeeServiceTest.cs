@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using Timesheet.Application.Services;
-using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.Tests
@@ -27,7 +27,7 @@ namespace Timesheet.Tests
                 Salary = salary
             };
 
-            var employeeRepository = new Mock<IEmploeeyRepository>();
+            var employeeRepository = new Mock<IEmployeeRepository>();
             employeeRepository.Setup(x => x.AddEmployee(staffEmployee)).Verifiable();
 
             var service = new EmployeeServie(employeeRepository.Object);
@@ -58,7 +58,7 @@ namespace Timesheet.Tests
                 Salary = salary
             };
 
-            var employeeRepository = new Mock<IEmploeeyRepository>();
+            var employeeRepository = new Mock<IEmployeeRepository>();
 
             var service = new EmployeeServie(employeeRepository.Object);
 

@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Timesheet.Application.Services;
 using Timesheet.DAL.CSV.Repositories;
-using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Interfaces.IRepository;
+using Timesheet.Domain.Interfaces.IService;
 
 namespace Timesheet.API
 {

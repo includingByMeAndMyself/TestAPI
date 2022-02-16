@@ -2,7 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Timesheet.Application.Services;
-using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.Tests
@@ -15,7 +15,7 @@ namespace Timesheet.Tests
             //arrange
 
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            var employeeRepositoryMock = new Mock<IEmploeeyRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             var expectedLastName = "Петров";
             var testSalary = 70000;
             var expectedTotal = 8750m; //(8+8+4)/160 * 70000
@@ -86,7 +86,7 @@ namespace Timesheet.Tests
             //arrange
 
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            var employeeRepositoryMock = new Mock<IEmploeeyRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             var expectedLastName = "Петров";
             var testSalary = 60000;
             
@@ -161,7 +161,7 @@ namespace Timesheet.Tests
             //arrange
 
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            var employeeRepositoryMock = new Mock<IEmploeeyRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             var expectedLastName = "Петров";
             var testSalary = 70000;
             var expectedTotal = 0m; 
@@ -207,7 +207,7 @@ namespace Timesheet.Tests
             //arrange
 
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            var employeeRepositoryMock = new Mock<IEmploeeyRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             var expectedLastName = "Петров";
             var testSalary = 70000;
             var expectedTotal = 3500m;
@@ -262,7 +262,7 @@ namespace Timesheet.Tests
             //arrange
 
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            var employeeRepositoryMock = new Mock<IEmploeeyRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             var expectedLastName = "Петров";
             var testSalary = 70000;
             var expectedTotal = 8m / 160m * 70000m + (4m / 160m * (70000m * 2m));

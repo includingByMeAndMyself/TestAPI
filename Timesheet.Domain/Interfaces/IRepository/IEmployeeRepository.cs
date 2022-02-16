@@ -1,8 +1,8 @@
 ﻿using Timesheet.Domain.Models;
 
-namespace Timesheet.Domain.Interfaces
+namespace Timesheet.Domain.Interfaces.IRepository
 {
-    public interface IEmploeeyRepository
+    public interface IEmployeeRepository
     {
         StaffEmployee GetEmployee(string lastName);
         void AddEmployee(StaffEmployee staffEmployee);

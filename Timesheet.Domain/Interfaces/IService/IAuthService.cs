@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheet.Domain.Interfaces
+namespace Timesheet.Domain.Interfaces.IService
 {
     public interface IAuthService
     {
-        List<string> Employees { get; }
         bool? Login(string lastName);
     }
 }

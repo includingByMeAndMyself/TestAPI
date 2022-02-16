@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheet.Domain.Models;
 
-namespace Timesheet.Domain.Interfaces
+namespace Timesheet.Domain.Interfaces.IService
 {
     public interface IEmployeeServie
     {

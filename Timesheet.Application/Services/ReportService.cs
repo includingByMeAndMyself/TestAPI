@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Timesheet.Domain.Interfaces;
+using Timesheet.Domain.Interfaces.IRepository;
+using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.Application.Services
@@ -11,9 +12,9 @@ namespace Timesheet.Application.Services
         private const decimal MAX_WORKING_HOURS_PER_DAY = 8m;
 
         private readonly ITimesheetRepository _timesheetRepository;
-        private readonly IEmploeeyRepository _emploeeyRepository;
+        private readonly IEmployeeRepository _emploeeyRepository;
 
-        public ReportService(ITimesheetRepository timesheetRepository, IEmploeeyRepository emploeeyRepository)
+        public ReportService(ITimesheetRepository timesheetRepository, IEmployeeRepository emploeeyRepository)
         {
             _timesheetRepository = timesheetRepository;
             _emploeeyRepository = emploeeyRepository;

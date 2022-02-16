@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Timesheet.Domain.Interfaces;
+﻿using Timesheet.Domain.Interfaces.IRepository;
+using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
 namespace Timesheet.Application.Services
