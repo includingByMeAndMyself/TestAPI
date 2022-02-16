@@ -17,7 +17,7 @@ namespace Timesheet.API.Controllers
         [HttpGet]
         public ActionResult<EmployeeReport> Report(string lastName)
         {
-            return _reportService.GetEmployeeReport(lastName);
+            return Ok(_reportService.GetEmployeeReport(lastName));
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Timesheet.DAL.CSV.Repositories
             var data = File.ReadAllText(PATH);
             var timeLogs = new List<TimeLog>();
 
-            foreach (var dataRow in data.Split('\n'))
+            foreach (var dataRow in data.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var timeLog = new TimeLog();
                 var dataMembers = dataRow.Split(DELIMETER);
