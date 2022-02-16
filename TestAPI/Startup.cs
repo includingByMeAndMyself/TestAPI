@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Timesheet.Application.Services;
+using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.DAL.CSV.Repositories;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
@@ -30,7 +31,10 @@ namespace Timesheet.API
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IReportService, ReportService>();
 
+            services.AddSingleton(x => new CsvSettings(";", "..\\Timesheet.DAL.CSV\\Data"));
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestAPI", Version = "v1" });

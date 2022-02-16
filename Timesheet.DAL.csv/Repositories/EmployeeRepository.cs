@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
@@ -8,18 +9,24 @@ namespace Timesheet.DAL.CSV.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private const string DELIMETER = ";";
-        private const string PATH = "..\\Timesheet.DAL.CSV\\Data\\employee.csv";
+        private readonly string _delimeter;
+        private readonly string _path;
+
+        public EmployeeRepository(CsvSettings csvSettings)
+        {
+            _delimeter = csvSettings.Delimeter;
+            _path = csvSettings.Path + "\\employee.csv";
+        }
 
         public StaffEmployee GetEmployee(string lastName)
         {
-            var data = File.ReadAllText(PATH);
+            var data = File.ReadAllText(_path);
             var timeLogs = new List<TimeLog>();
             StaffEmployee staffEmployee = null;
 
             foreach (var dataRow in data.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
-                var dataMembers = dataRow.Split(DELIMETER);
+                var dataMembers = dataRow.Split(_delimeter);
 
                 staffEmployee = new StaffEmployee()
                 {
@@ -35,9 +42,9 @@ namespace Timesheet.DAL.CSV.Repositories
 
         public void AddEmployee(StaffEmployee staffEmployee)
         {
-            var dataRow = $"{staffEmployee.LastName}{DELIMETER}{staffEmployee.Salary}{DELIMETER}\n";
+            var dataRow = $"{staffEmployee.LastName}{_delimeter}{staffEmployee.Salary}{_delimeter}\n";
 
-            File.AppendAllText(PATH, dataRow);
+            File.AppendAllText(_path, dataRow);
         }
     }
 }

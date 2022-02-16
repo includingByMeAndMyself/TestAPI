@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
@@ -8,18 +9,24 @@ namespace Timesheet.DAL.CSV.Repositories
 {
     public class TimesheetRepository : ITimesheetRepository
     {
-        private const string DELIMETER = ";";
-        private const string PATH = "..\\Timesheet.DAL.CSV\\Data\\timesheet.csv";
+        private readonly string _delimeter;
+        private readonly string _path;
+
+        public TimesheetRepository(CsvSettings csvSettings)
+        {
+            _delimeter = csvSettings.Delimeter;
+            _path = csvSettings.Path + "\\timesheet.csv";
+        }
 
         public TimeLog[] GetTimeLogs(string lastName)
         {
-            var data = File.ReadAllText(PATH);
+            var data = File.ReadAllText(_path);
             var timeLogs = new List<TimeLog>();
 
             foreach (var dataRow in data.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var timeLog = new TimeLog();
-                var dataMembers = dataRow.Split(DELIMETER);
+                var dataMembers = dataRow.Split(_delimeter);
 
                 timeLog.Comment = dataMembers[0];
                 timeLog.Date =  DateTime.TryParse(dataMembers[1], out var date) ? date : new DateTime();
@@ -32,12 +39,12 @@ namespace Timesheet.DAL.CSV.Repositories
 
         public void Add(TimeLog timeLog)
         {
-            var dataRow = $"{timeLog.Comment}{DELIMETER}" +
-                          $"{timeLog.Date}{DELIMETER}" +
-                          $"{timeLog.LastName}{DELIMETER}" +
+            var dataRow = $"{timeLog.Comment}{_delimeter}" +
+                          $"{timeLog.Date}{_delimeter}" +
+                          $"{timeLog.LastName}{_delimeter}" +
                           $"{timeLog.WorkingHours}\n";
 
-            File.AppendAllText(PATH, dataRow);
+            File.AppendAllText(_path, dataRow);
         }
 
     }
