@@ -15,36 +15,49 @@ namespace Timesheet.DAL.CSV.Repositories
         public EmployeeRepository(CsvSettings csvSettings)
         {
             _delimeter = csvSettings.Delimeter;
-            _path = csvSettings.Path + "\\employee.csv";
+            _path = csvSettings.Path + "\\employees.csv";
         }
 
-        public StaffEmployee GetEmployee(string lastName)
+        public void AddEmployee(Employee employee)
+        {
+            var dataRow = employee.GetPersonalData(_delimeter);
+            File.AppendAllText(_path, dataRow);
+        }
+
+        public Employee GetEmployee(string lastName)
         {
             var data = File.ReadAllText(_path);
-            var timeLogs = new List<TimeLog>();
-            StaffEmployee staffEmployee = null;
+            var dataRows = data.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            Employee employee = null;
 
-            foreach (var dataRow in data.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+            foreach (var dataRow in dataRows)
             {
-                var dataMembers = dataRow.Split(_delimeter);
-
-                staffEmployee = new StaffEmployee()
+                if (dataRow.Contains(lastName))
                 {
-                    LastName = dataMembers[0],
-                    Salary = decimal.TryParse(dataMembers[1], out decimal salary) ? salary : 0
-                };
-
-                break;
+                    var dataMembers = dataRow.Split(_delimeter);
+                    decimal salary = 0;
+                    decimal.TryParse(dataMembers[1], out salary);
+                    var position = dataMembers[2];
+                    switch (position)
+                    {
+                        case "Руководитель":
+                            decimal bonus = 0;
+                            decimal.TryParse(dataMembers[1], out bonus);
+                            employee = new SuperiorEmployee(lastName, salary, bonus);
+                            break;
+                        case "Штатный сотрудник":
+                            employee = new StaffEmployee(lastName, salary);
+                            break;
+                        case "Фрилансер":
+                            employee = new FreelancerEmployee(lastName, salary);
+                            break;
+                        default:
+                            break; // Выбрасывать исключение?
+                    }
+                    break;
+                }
             }
-
-            return staffEmployee;
-        }
-
-        public void AddEmployee(StaffEmployee staffEmployee)
-        {
-            var dataRow = $"{staffEmployee.LastName}{_delimeter}{staffEmployee.Salary}{_delimeter}\n";
-
-            File.AppendAllText(_path, dataRow);
+            return employee;
         }
     }
 }

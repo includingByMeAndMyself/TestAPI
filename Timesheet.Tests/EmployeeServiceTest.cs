@@ -21,12 +21,8 @@ namespace Timesheet.Tests
         {
             //arrage
 
-            var staffEmployee = new StaffEmployee()
-            {
-                LastName = lastName,
-                Salary = salary
-            };
-
+            var staffEmployee = new StaffEmployee(lastName, salary);
+         
             var employeeRepository = new Mock<IEmployeeRepository>();
             employeeRepository.Setup(x => x.AddEmployee(staffEmployee)).Verifiable();
 
@@ -52,11 +48,7 @@ namespace Timesheet.Tests
         {
             //arrage
 
-            var staffEmployee = new StaffEmployee()
-            {
-                LastName = lastName,
-                Salary = salary
-            };
+            var staffEmployee = new StaffEmployee(lastName, salary);
 
             var employeeRepository = new Mock<IEmployeeRepository>();
 

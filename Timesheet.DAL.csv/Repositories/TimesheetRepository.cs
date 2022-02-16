@@ -39,10 +39,11 @@ namespace Timesheet.DAL.CSV.Repositories
 
         public void Add(TimeLog timeLog)
         {
-            var dataRow = $"{timeLog.Comment}{_delimeter}" +
-                          $"{timeLog.Date}{_delimeter}" +
-                          $"{timeLog.LastName}{_delimeter}" +
-                          $"{timeLog.WorkingHours}\n";
+            var dataRow = 
+                $"{timeLog.Comment}{_delimeter}" +
+                $"{timeLog.Date}{_delimeter}" +
+                $"{timeLog.LastName}{_delimeter}" +
+                $"{timeLog.WorkingHours}\n";
 
             File.AppendAllText(_path, dataRow);
         }

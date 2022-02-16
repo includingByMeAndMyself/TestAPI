@@ -6,11 +6,11 @@ namespace Timesheet.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EmployeeController : ControllerBase
+    public class StaffEmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public StaffEmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }

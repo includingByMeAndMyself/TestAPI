@@ -2,15 +2,20 @@
 
 namespace Timesheet.Domain.Models
 {
-    public class StaffEmployee : Employee
+    public class SuperiorEmployee : Employee
     {
-        public StaffEmployee(string lastName, decimal salary) : base(lastName, salary)
+        public SuperiorEmployee(string lastName, decimal salary, decimal bonus) : base(lastName, salary)
         {
+            Bonus = bonus;
         }
+
+        public decimal Bonus { get; set; }
+
         public override decimal CalculateBill(TimeLog[] timeLogs)
         {
             var totalHours = timeLogs.Sum(x => x.WorkingHours);
             decimal bill = 0;
+
             var workingHoursGroupsByDay = timeLogs
                 .GroupBy(x => x.Date.ToShortDateString());
 
@@ -20,10 +25,9 @@ namespace Timesheet.Domain.Models
 
                 if (dayHours > MAX_WORKING_HOURS_PER_DAY)
                 {
-                    var overtime = dayHours - MAX_WORKING_HOURS_PER_DAY;
 
-                    bill += MAX_WORKING_HOURS_PER_DAY / MAX_WORKING_HOURS_PER_MONTH * Salary;
-                    bill += overtime / MAX_WORKING_HOURS_PER_MONTH * Salary * 2;
+                    decimal bonusPerDay = MAX_WORKING_HOURS_PER_DAY / MAX_WORKING_HOURS_PER_MONTH * Bonus;
+                    bill += MAX_WORKING_HOURS_PER_DAY / MAX_WORKING_HOURS_PER_MONTH * Salary + bonusPerDay;
                 }
                 else
                 {
@@ -36,7 +40,7 @@ namespace Timesheet.Domain.Models
 
         public override string GetPersonalData(string delimeter)
         {
-            return $"{LastName}{delimeter}{Salary}{delimeter}Штатный сотрудник{delimeter}\n";
+            return $"{LastName}{delimeter}{Salary}{delimeter}Руководитель{delimeter}{Bonus}{delimeter}\n";
         }
     }
 }
