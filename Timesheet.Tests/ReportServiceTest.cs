@@ -407,11 +407,12 @@ namespace Timesheet.Tests
         #region Should return reporn without timelogs
 
         [Test]
-        public void GetEmployeeReport_WithoutTimeLogs()
+        public void GetEmployeeReport_Staff_WithoutTimeLogs()
         {
             //arrange
             var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
+            
             var expectedTotal = 0m;
             var expectedTotalHours = 0;
 
@@ -434,6 +435,47 @@ namespace Timesheet.Tests
             var result = service.GetEmployeeReport(expectedLastName);
 
             //assert
+            timesheetRepositoryMock.VerifyAll();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedLastName, result.LastName);
+
+            Assert.IsNotNull(result.TimeLogs);
+            Assert.IsEmpty(result.TimeLogs);
+
+            Assert.AreEqual(expectedTotal, result.Bill);
+            Assert.AreEqual(expectedTotalHours, result.TotalHours);
+        }
+
+        [Test]
+        [TestCase("Иванов")]
+        [TestCase("Петров")]
+        public void GetEmployeeReport_Freelancer_WithoutTimeLogs(string expectedLastName)
+        {
+            //arrange
+            var timesheetRepositoryMock = new Mock<ITimesheetRepository>();
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
+            var expectedTotal = 0m;
+            var expectedTotalHours = 0;
+
+            timesheetRepositoryMock
+                .Setup(x => x.GetTimeLogs(It.Is<string>(y => y == expectedLastName)))
+                .Returns(() => new TimeLog[0])
+                .Verifiable();
+
+            employeeRepositoryMock
+                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Returns(() => new FreelancerEmployee(expectedLastName, 70000))
+                .Verifiable();
+
+            var service = new ReportService(timesheetRepositoryMock.Object, employeeRepositoryMock.Object);
+
+            //act
+            
+            var result = service.GetEmployeeReport(expectedLastName);
+
+            //assert
+            
             timesheetRepositoryMock.VerifyAll();
 
             Assert.IsNotNull(result);
