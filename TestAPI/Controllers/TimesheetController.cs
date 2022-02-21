@@ -18,7 +18,7 @@ namespace Timesheet.API.Controllers
         [HttpPost]
         public ActionResult<bool?> TrackTime(TimeLog timeLog)
         {
-            return Ok(_timesheetService.TrackTime(timeLog));
+            return Ok(_timesheetService.TrackTime(timeLog, timeLog.LastName));
         }
     }
 }
