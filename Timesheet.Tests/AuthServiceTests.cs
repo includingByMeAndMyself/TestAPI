@@ -1,6 +1,7 @@
  using Moq;
  using NUnit.Framework;
- using Timesheet.Application.Services;
+using System;
+using Timesheet.Application.Services;
  using Timesheet.Domain.Interfaces.IRepository;
  using Timesheet.Domain.Models;
 
@@ -102,6 +103,17 @@
 
             Assert.IsFalse(result);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName) == false);
+        }
+
+        [Test]
+        public void Test()
+        {
+            var employeeRepositoryMock = new Mock<IEmployeeRepository>();
+            var service = new AuthService(employeeRepositoryMock.Object);
+
+            var employee = new SuperiorEmployee("TestName", 0, 0);
+
+            var token = service.GenerateJWT("as dsd aas asas assd sdsd", employee);
         }
     }
 }

@@ -55,7 +55,9 @@ namespace Timesheet.API
 
             app.UseRouting();
 
-            app.UseAuthorization(); 
+            app.UseAuthorization();
+
+            app.UseMiddleware<JwtAuthMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
