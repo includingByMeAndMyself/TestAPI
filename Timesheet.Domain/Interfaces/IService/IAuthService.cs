@@ -8,6 +8,6 @@ namespace Timesheet.Domain.Interfaces.IService
 {
     public interface IAuthService
     {
-        bool? Login(string lastName);
+        string Login(string lastName);
     }
 }

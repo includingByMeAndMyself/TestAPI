@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Timesheet.Domain.Models
 {
     public abstract class Employee
@@ -18,5 +19,13 @@ namespace Timesheet.Domain.Models
         public string Position { get; set; }
         public abstract decimal CalculateBill(TimeLog[] timeLogs);
         public abstract string GetPersonalData(string delimeter);
+        public virtual bool CheckInputLog(TimeLog timeLog)
+        {
+            bool isValid = timeLog.Date <= DateTime.Now && timeLog.Date > timeLog.Date.AddYears(-1);
+            isValid = timeLog.WorkingHours > 0
+                && timeLog.WorkingHours <= 24
+                && !string.IsNullOrWhiteSpace(timeLog.LastName) && isValid;
+            return isValid;
+        }
     }
 }

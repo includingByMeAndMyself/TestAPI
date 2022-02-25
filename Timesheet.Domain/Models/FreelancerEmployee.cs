@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Timesheet.Domain.Models
 {
@@ -21,6 +19,13 @@ namespace Timesheet.Domain.Models
         public override string GetPersonalData(string delimeter)
         {
             return $"{LastName}{delimeter}{Salary}{delimeter}Фрилансер{delimeter}\n";
+        }
+
+        public override bool CheckInputLog(TimeLog timeLog)
+        {
+            bool isValid = base.CheckInputLog(timeLog);
+            isValid = timeLog.LastName == this.LastName && timeLog.Date > DateTime.Now.AddDays(-2) && isValid;
+            return isValid;
         }
     }
 }

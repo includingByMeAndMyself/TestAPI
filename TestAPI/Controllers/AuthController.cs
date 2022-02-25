@@ -16,7 +16,7 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<bool?> Login([FromBody] LoginRequest request)
+        public ActionResult<string> Login([FromBody] LoginRequest request)
         {
             return Ok(_authService.Login(request.LastName));
         }

@@ -14,20 +14,21 @@ namespace Timesheet.API
         {
             _next = next;
         }
-        public async Task InvokeAsync(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             var authHeader = context.Request.Headers["Authorization"]
                 .FirstOrDefault();
 
-            if(authHeader != null)
+            if (authHeader != null)
             {
-                var secret = "as dsd aas asas assd sdsd";
+                var secret = "secret secret secret secret secret";
                 var key = Encoding.UTF8.GetBytes(secret);
 
                 var token = authHeader.Split(" ").Last();
+
                 var tokenHandler = new JwtSecurityTokenHandler();
 
-                var validationParameters = new TokenValidationParameters()
+                var validationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -35,7 +36,9 @@ namespace Timesheet.API
                     ValidateIssuer = false
                 };
 
-                tokenHandler.ValidateToken(token, validationParameters, out var validatedToken);
+                tokenHandler.ValidateToken(token,
+                    validationParameters,
+                    out var validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
 

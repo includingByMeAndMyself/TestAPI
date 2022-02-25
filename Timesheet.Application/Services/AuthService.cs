@@ -17,25 +17,16 @@ namespace Timesheet.Application.Services
             _employeeRepository = employeeRepository;
         }
 
-        public bool? Login(string lastName)
+        public string Login(string lastName)
         {
-            if (string.IsNullOrWhiteSpace(lastName))
-            {
-                return false;
-            }
+            var employee = _employeeRepository.GetEmployee(lastName);
+            var secret = "secret secret secret secret secret";
+            var token = GenerateJwtToken(secret, employee);
 
-            var Employee = _employeeRepository.GetEmployee(lastName);
-            var isEmployeeExist = Employee != null;
-
-            if (isEmployeeExist)
-            {
-                UserSession.Sessions.Add(lastName);
-            }
-
-            return isEmployeeExist;
+            return token;
         }
 
-        public string GenerateJWT(string secret, Employee employee)
+        public string GenerateJwtToken(string secret, Employee employee)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 

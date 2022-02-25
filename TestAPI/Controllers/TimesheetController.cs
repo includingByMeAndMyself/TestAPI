@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.Api.Models;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
@@ -16,9 +17,25 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<bool?> TrackTime(TimeLog timeLog)
+        public ActionResult<bool?> TrackTime(CreateTimeLogRequest request)
         {
-            return Ok(_timesheetService.TrackTime(timeLog, timeLog.LastName));
+            //var lastName = (string)HttpContext.Items["lastName"];
+
+            if (ModelState.IsValid)
+            {
+                var timeLog = new TimeLog
+                {
+                    Comment = request.Comment,
+                    Date = request.Date,
+                    LastName = request.LastName,
+                    WorkingHours = request.WorkingHours
+                };
+
+                var result = _timesheetService.TrackTime(timeLog, timeLog.LastName);
+                return Ok(result);
+            }
+
+            return BadRequest();
         }
     }
 }

@@ -113,7 +113,7 @@ using Timesheet.Application.Services;
 
             var employee = new SuperiorEmployee("TestName", 0, 0);
 
-            var token = service.GenerateJWT("as dsd aas asas assd sdsd", employee);
+            var token = service.GenerateJwtToken("as dsd aas asas assd sdsd", employee);
         }
     }
 }
