@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Timeheet.DAL.MSSQL.Entities
@@ -10,5 +11,6 @@ namespace Timeheet.DAL.MSSQL.Entities
         public string LastName { get; set; }
         public decimal Salary { get; set; }
         public string Position { get; set; }
+        public ICollection<TimeLog> TimeLogs { get; set; }
     }
 }
