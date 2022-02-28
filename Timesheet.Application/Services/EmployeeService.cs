@@ -19,7 +19,7 @@ namespace Timesheet.BussinessLogic.Services
 
             if (isValid)
             {
-                _emploeeyRepository.AddEmployee(employee);
+                _emploeeyRepository.Add(employee);
             }
 
             return isValid;

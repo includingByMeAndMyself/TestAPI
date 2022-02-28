@@ -17,7 +17,7 @@ using Timesheet.BussinessLogic.Services;
             //arrange
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
 
@@ -40,7 +40,7 @@ using Timesheet.BussinessLogic.Services;
             string lastName = "Иванов";
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
 
@@ -72,7 +72,7 @@ using Timesheet.BussinessLogic.Services;
             var result = service.Login(lastName);
 
             //assert
-            employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Never);
+            employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Never);
 
             Assert.IsEmpty(UserSession.Sessions);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName) == false);
@@ -85,7 +85,7 @@ using Timesheet.BussinessLogic.Services;
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
 
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
 
                 .Returns(() => null);
 
@@ -96,7 +96,7 @@ using Timesheet.BussinessLogic.Services;
 
             //assert
 
-            employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Once);
+            employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Once);
 
             Assert.IsTrue(UserSession.Sessions.Contains(lastName) == false);
         }

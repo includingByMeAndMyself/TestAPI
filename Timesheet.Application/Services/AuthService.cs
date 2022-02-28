@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -19,7 +20,12 @@ namespace Timesheet.BussinessLogic.Services
 
         public string Login(string lastName)
         {
-            var employee = _employeeRepository.GetEmployee(lastName);
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentException(nameof(lastName));
+            }
+
+            var employee = _employeeRepository.Get(lastName);
             var secret = "secret secret secret secret secret";
             var token = GenerateJwtToken(secret, employee);
 
@@ -34,7 +40,7 @@ namespace Timesheet.BussinessLogic.Services
 
             var descriptor = new SecurityTokenDescriptor()
             {
-                Audience = employee.Position,
+                Audience = employee.Position.ToString(),
                 Claims = new Dictionary<string, object> 
                 { 
                     { "LastName", employee.LastName } 
