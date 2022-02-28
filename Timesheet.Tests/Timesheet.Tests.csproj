@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestAPI\Timesheet.API.csproj" />
-    <ProjectReference Include="..\Timesheet.Application\Timesheet.Application.csproj" />
+    <ProjectReference Include="..\Timesheet.Application\Timesheet.BussinessLogic.csproj" />
     <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj" />
   </ItemGroup>
 

@@ -1,16 +1,21 @@
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Timeheet.DAL.MSSQL;
 using Timesheet.Api.Models;
-using Timesheet.Application.Services;
+using Timesheet.BussinessLogic.Services;
 using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.DAL.CSV.Repositories;
+using Timesheet.Domain.Interfaces.IClient;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
+using Timesheet.Itegrations.GitHub;
 
 namespace Timesheet.API
 {
@@ -29,15 +34,26 @@ namespace Timesheet.API
             services.AddTransient<IValidator<CreateTimeLogRequest>, TimeLogFluentValidator>();
 
             services.AddTransient<IAuthService, AuthService>();
+            
             services.AddTransient<ITimesheetRepository, TimesheetRepository>();
             services.AddTransient<ITimesheetService, TimesheetService>();
+            
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            
             services.AddTransient<IReportService, ReportService>();
+            
+            services.AddTransient<IIssuesService, IssuesService>();
+
+            services.AddTransient<IIssuesClient>(x => new IssuesClient("token"));
 
             services.AddSingleton(x => new CsvSettings(";", "..\\Timesheet.DAL.CSV\\Data"));
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
+            services.AddControllers().AddNewtonsoftJson();
+
+            services.AddDbContext<TimesheetContext>(x =>
+                x.UseSqlServer(Configuration.GetConnectionString("TimesheetContext")));
 
             services.AddSwaggerGen(c =>
             {

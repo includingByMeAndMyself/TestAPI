@@ -1,7 +1,7 @@
  using Moq;
  using NUnit.Framework;
 using System;
-using Timesheet.Application.Services;
+using Timesheet.BussinessLogic.Services;
  using Timesheet.Domain.Interfaces.IRepository;
  using Timesheet.Domain.Models;
 
@@ -32,7 +32,6 @@ using Timesheet.Application.Services;
             Assert.IsNotNull(UserSession.Sessions);
             Assert.IsNotEmpty(UserSession.Sessions);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName));
-            Assert.IsTrue(result);
         }
 
         public void Login_InvokeLoginTwiceForOneLastName_ShouldReturnTrue()
@@ -58,7 +57,6 @@ using Timesheet.Application.Services;
             Assert.IsNotNull(UserSession.Sessions);
             Assert.IsNotEmpty(UserSession.Sessions);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName));
-            Assert.IsTrue(result);
         }
 
         [TestCase(null)]
@@ -76,7 +74,6 @@ using Timesheet.Application.Services;
             //assert
             employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Never);
 
-            Assert.IsFalse(result);
             Assert.IsEmpty(UserSession.Sessions);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName) == false);
         }
@@ -101,7 +98,6 @@ using Timesheet.Application.Services;
 
             employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Once);
 
-            Assert.IsFalse(result);
             Assert.IsTrue(UserSession.Sessions.Contains(lastName) == false);
         }
 
