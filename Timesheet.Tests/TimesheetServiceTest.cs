@@ -9,22 +9,16 @@ namespace Timesheet.Tests
 {
     public class TimesheetServiceTest
     {
-        private readonly TimesheetService _service;
-        private readonly Mock<ITimesheetRepository> _timesheetRepositoryMock;
-        private readonly Mock<IEmployeeRepository> _employeeRepositoryMock;
-        public TimesheetServiceTest()
-        {
-            _timesheetRepositoryMock = new Mock<ITimesheetRepository>();
-            _employeeRepositoryMock = new Mock<IEmployeeRepository>();
-
-
-            _service = new TimesheetService(_timesheetRepositoryMock.Object, _employeeRepositoryMock.Object);
-        }
-
+        private TimesheetService _service;
+        private Mock<ITimesheetRepository> _timesheetRepositoryMock;
+        private Mock<IEmployeeRepository> _employeeRepositoryMock;
+        
         [SetUp]
         public void SetUp()
         {
-            UserSession.Sessions.Clear();
+            _timesheetRepositoryMock = new Mock<ITimesheetRepository>();
+            _employeeRepositoryMock = new Mock<IEmployeeRepository>();
+            _service = new TimesheetService(_timesheetRepositoryMock.Object, _employeeRepositoryMock.Object);
         }
 
         [Test]
@@ -33,7 +27,6 @@ namespace Timesheet.Tests
             //arrange
 
             var expectedLastName = "TestUser";
-            UserSession.Sessions.Add(expectedLastName);
 
             var timeLog = new TimeLog()
             {
@@ -69,7 +62,6 @@ namespace Timesheet.Tests
             //arrange
 
             var expectedLastName = "TestUser";
-            UserSession.Sessions.Add(expectedLastName);
 
             var timeLog = new TimeLog()
             {
@@ -145,7 +137,6 @@ namespace Timesheet.Tests
             //arrange
 
             var expectedLastName = "TestUser";
-            UserSession.Sessions.Add(expectedLastName);
 
             var timeLog = new TimeLog()
             {
@@ -182,8 +173,6 @@ namespace Timesheet.Tests
 
             var expectedLastName = "TestUser";
 
-            UserSession.Sessions.Add(expectedLastName);
-
             var timeLog = new TimeLog()
             {
                 Date = DateTime.Now,
@@ -219,8 +208,6 @@ namespace Timesheet.Tests
 
             var expectedLastName = "TestUser";
 
-            UserSession.Sessions.Add(expectedLastName);
-
             var timeLog = new TimeLog()
             {
                 Date = DateTime.Now.AddDays(-3),
@@ -239,7 +226,6 @@ namespace Timesheet.Tests
             var result = _service.TrackTime(timeLog, expectedLastName);
 
             //assert
-
             Assert.False(result);
 
             _employeeRepositoryMock.VerifyAll();

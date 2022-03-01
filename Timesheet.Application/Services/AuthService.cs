@@ -60,11 +60,4 @@ namespace Timesheet.BussinessLogic.Services
             return tokenHandler.WriteToken(token);
         }
     }
-
-    
-
-    public static class UserSession
-    {
-        public static HashSet<string> Sessions { get; set; } = new HashSet<string>(); 
-    }
 }
