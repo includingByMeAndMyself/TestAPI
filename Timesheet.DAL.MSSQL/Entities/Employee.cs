@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Timesheet.Domain.Models;
 
-namespace Timeheet.DAL.MSSQL.Entities
+namespace Timesheet.DAL.MSSQL.Entities
 {
     public class Employee
     {

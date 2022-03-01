@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubTests", "GitHubTests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.Itegrations.GitHub", "Timesheet.Itegrations.GitHub\Timesheet.Itegrations.GitHub.csproj", "{B9DD8E25-9B6F-4B38-8248-DC30E1DE29CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.DAL.MSSQL", "Timesheet.DAL.MSSQL\Timesheet.DAL.MSSQL.csproj", "{B1056B0A-FCF7-44BE-903A-EA23A2CF05E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.DAL.MSSQL", "Timesheet.DAL.MSSQL\Timesheet.DAL.MSSQL.csproj", "{B1056B0A-FCF7-44BE-903A-EA23A2CF05E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.DAL.MSSQL.Tests", "Timesheet.DataAccess.MSSQL.Tests\Timesheet.DAL.MSSQL.Tests.csproj", "{926061C1-38D7-445B-9DD2-24A6DF5DD068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{B1056B0A-FCF7-44BE-903A-EA23A2CF05E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1056B0A-FCF7-44BE-903A-EA23A2CF05E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1056B0A-FCF7-44BE-903A-EA23A2CF05E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926061C1-38D7-445B-9DD2-24A6DF5DD068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926061C1-38D7-445B-9DD2-24A6DF5DD068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926061C1-38D7-445B-9DD2-24A6DF5DD068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926061C1-38D7-445B-9DD2-24A6DF5DD068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

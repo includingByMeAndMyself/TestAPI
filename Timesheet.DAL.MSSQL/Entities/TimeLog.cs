@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Timeheet.DAL.MSSQL.Entities
+namespace Timesheet.DAL.MSSQL.Entities
 {
     public class TimeLog
     {

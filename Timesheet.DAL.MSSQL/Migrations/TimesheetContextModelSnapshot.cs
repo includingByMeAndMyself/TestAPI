@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Timeheet.DAL.MSSQL;
+using Timesheet.DAL.MSSQL;
 
 namespace Timesheet.DAL.MSSQL.Migrations
 {
@@ -19,7 +19,7 @@ namespace Timesheet.DAL.MSSQL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Timeheet.DAL.MSSQL.Entities.Employee", b =>
+            modelBuilder.Entity("Timesheet.DAL.MSSQL.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,9 +41,33 @@ namespace Timesheet.DAL.MSSQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bonus = 20000m,
+                            LastName = "Иванов",
+                            Position = 0,
+                            Salary = 200000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LastName = "Сидоров",
+                            Position = 2,
+                            Salary = 1000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LastName = "Петров",
+                            Position = 1,
+                            Salary = 120000m
+                        });
                 });
 
-            modelBuilder.Entity("Timeheet.DAL.MSSQL.Entities.TimeLog", b =>
+            modelBuilder.Entity("Timesheet.DAL.MSSQL.Entities.TimeLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,14 +96,14 @@ namespace Timesheet.DAL.MSSQL.Migrations
                     b.ToTable("TimeLogs");
                 });
 
-            modelBuilder.Entity("Timeheet.DAL.MSSQL.Entities.TimeLog", b =>
+            modelBuilder.Entity("Timesheet.DAL.MSSQL.Entities.TimeLog", b =>
                 {
-                    b.HasOne("Timeheet.DAL.MSSQL.Entities.Employee", null)
+                    b.HasOne("Timesheet.DAL.MSSQL.Entities.Employee", null)
                         .WithMany("TimeLogs")
                         .HasForeignKey("EmployeeId");
                 });
 
-            modelBuilder.Entity("Timeheet.DAL.MSSQL.Entities.Employee", b =>
+            modelBuilder.Entity("Timesheet.DAL.MSSQL.Entities.Employee", b =>
                 {
                     b.Navigation("TimeLogs");
                 });

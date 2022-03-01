@@ -7,11 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Timeheet.DAL.MSSQL;
 using Timesheet.Api.Models;
 using Timesheet.BussinessLogic.Services;
 using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.DAL.CSV.Repositories;
+using Timesheet.DAL.MSSQL;
 using Timesheet.Domain.Interfaces.IClient;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
@@ -31,6 +31,8 @@ namespace Timesheet.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ApiMappingProfile), typeof(DataAccessMappingProfile));
+
             services.AddTransient<IValidator<CreateTimeLogRequest>, TimeLogFluentValidator>();
 
             services.AddTransient<IAuthService, AuthService>();

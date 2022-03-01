@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Timesheet.BussinessLogic.Exceptions;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
@@ -26,6 +27,12 @@ namespace Timesheet.BussinessLogic.Services
             }
 
             var employee = _employeeRepository.Get(lastName);
+
+            if (employee == null)
+            {
+                throw new NotFoundException($"Employee with last name {lastName}");
+            }
+
             var secret = "secret secret secret secret secret";
             var token = GenerateJwtToken(secret, employee);
 
