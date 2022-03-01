@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.API.ResourceModels;
+using Timesheet.Domain.Interfaces.IService;
 
 namespace Timesheet.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class AuthController : ControllerBase
+    [Route("api/[controller]")]
+    public class AuthController : Controller
     {
-        [HttpGet]
-        public string Get(string name)
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
         {
-            return name;
+            _authService = authService;
+        }
+
+        [HttpPost]
+        public ActionResult<string> Login([FromBody] LoginRequest request)
+        {
+            return Ok(_authService.Login(request.LastName));
         }
     }
 }
