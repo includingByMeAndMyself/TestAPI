@@ -34,6 +34,7 @@ namespace Timesheet.API
             services.AddAutoMapper(typeof(ApiMappingProfile), typeof(DataAccessMappingProfile));
 
             services.AddTransient<IValidator<CreateTimeLogRequest>, TimeLogFluentValidator>();
+            services.AddTransient<IValidator<LoginRequest>, LoginRequestFluentValidator>();
 
             services.AddTransient<IAuthService, AuthService>();
             
