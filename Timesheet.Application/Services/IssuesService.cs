@@ -17,7 +17,7 @@ namespace Timesheet.BussinessLogic.Services
             _client = client;
         }
 
-        public Issue[] Get()
+        public Issue[] Get(string login, string project)
         {
             var issues = _client.Get("user login").Result;
             return issues;

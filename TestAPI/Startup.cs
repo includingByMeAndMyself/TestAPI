@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Timesheet.Api.Models;
+using Timesheet.API.Models;
 using Timesheet.BussinessLogic.Services;
 using Timesheet.DAL.CSV.Infrastructure;
 using Timesheet.DAL.CSV.Repositories;
@@ -51,6 +51,8 @@ namespace Timesheet.API
             services.AddTransient<IIssuesClient>(x => new IssuesClient("token"));
 
             services.AddSingleton(x => new CsvSettings(";", "..\\Timesheet.DAL.CSV\\Data"));
+
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddControllers().AddFluentValidation();
             services.AddControllers().AddNewtonsoftJson();

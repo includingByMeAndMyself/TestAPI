@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Timesheet.Itegrations.GitHub\Timesheet.Itegrations.GitHub.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ResourceModels\" />
+  </ItemGroup>
+
 </Project>

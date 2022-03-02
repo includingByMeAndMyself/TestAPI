@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Timesheet.API.Models;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
@@ -9,15 +11,20 @@ namespace Timesheet.API.Controllers
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;
-        public ReportController(IReportService reportService)
+        private readonly IMapper _mapper;
+
+        public ReportController(IReportService reportService, IMapper mapper)
         {
             _reportService = reportService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<EmployeeReport> Report(string lastName)
+        public ActionResult<GetEmployeeReportResponse> Get(string lastName)
         {
-            return Ok(_reportService.GetEmployeeReport(lastName));
+            var result = _reportService.GetEmployeeReport(lastName);
+
+            return _mapper.Map<GetEmployeeReportResponse>(result);
         }
     }
 }

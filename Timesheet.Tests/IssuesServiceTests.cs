@@ -14,7 +14,7 @@ namespace Timesheet.Tests
 
             //act
 
-            var issues = service.Get();
+            var issues = service.Get("", "");
 
             //assert
             Assert.IsNotNull(issues);

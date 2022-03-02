@@ -4,6 +4,6 @@ namespace Timesheet.Domain.Interfaces.IService
 {
     public interface IIssuesService
     {
-        Issue[] Get();
+        Issue[] Get(string login, string project);
     }
 }

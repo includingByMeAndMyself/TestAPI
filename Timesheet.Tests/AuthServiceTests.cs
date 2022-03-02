@@ -26,13 +26,15 @@ using Timesheet.BussinessLogic.Services;
         public void Login_ShouldReturnToken(string lastName)
         {
             //arrange
+            var secret = Guid.NewGuid().ToString();
+
             _employeeRepositoryMock
                 .Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
             
             //act
-            var result = _service.Login(lastName);
+            var result = _service.Login(lastName, secret);
 
             //assert
             _employeeRepositoryMock.VerifyAll();
@@ -42,6 +44,8 @@ using Timesheet.BussinessLogic.Services;
         public void Login_InvokeLoginTwiceForOneLastName_ShouldReturnTrue()
         {
             //arrange
+            var secret = Guid.NewGuid().ToString();
+
             string lastName = "Иванов";
             _employeeRepositoryMock
                 .Setup(x => x.Get(It.Is<string>(y => y == lastName)))
@@ -49,8 +53,8 @@ using Timesheet.BussinessLogic.Services;
                 .Verifiable();
 
             //act
-            var token1 = _service.Login(lastName);
-            var token2 = _service.Login(lastName);
+            var token1 = _service.Login(lastName, secret);
+            var token2 = _service.Login(lastName, secret);
             
             //assert
             _employeeRepositoryMock.VerifyAll();
@@ -65,10 +69,11 @@ using Timesheet.BussinessLogic.Services;
         public void Login_NotValidArgument_ShouldReturnThrowArgumentException(string lastName)
         {
             //arrange
+            var secret = Guid.NewGuid().ToString();
 
             //act 
             string result = null;
-            Assert.Throws<ArgumentException>(() => result = _service.Login(lastName));
+            Assert.Throws<ArgumentException>(() => result = _service.Login(lastName, secret));
 
             //assert
             _employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Never);
@@ -79,6 +84,7 @@ using Timesheet.BussinessLogic.Services;
         public void Login_UserDoesntExist_ShouldReturnThrowNotFoundException(string lastName)
         {
             //arrange
+            var secret = Guid.NewGuid().ToString();
 
             _employeeRepositoryMock
                 .Setup(x => x.Get(It.Is<string>(y => y == lastName)))
@@ -86,7 +92,7 @@ using Timesheet.BussinessLogic.Services;
 
             //act  
             string result = null;
-            Assert.Throws<NotFoundException>(() => result = _service.Login(lastName));
+            Assert.Throws<NotFoundException>(() => result = _service.Login(lastName, secret));
 
             //assert
             _employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Once);

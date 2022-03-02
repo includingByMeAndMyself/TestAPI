@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheet.Domain.Interfaces.IService
+namespace Timesheet.API
 {
-    public interface IAuthService
+    public class JwtConfig
     {
-        string Login(string lastName, string secret);
+        public string Secret { get; set; }
     }
 }

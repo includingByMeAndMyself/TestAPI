@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Timesheet.Api.Models;
+using Timesheet.API.Models;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
@@ -19,7 +19,7 @@ namespace Timesheet.API.Controllers
         [HttpPost]
         public ActionResult<bool?> TrackTime(CreateTimeLogRequest request)
         {
-            //var lastName = (string)HttpContext.Items["lastName"];
+            var lastName = (string)HttpContext.Items["lastName"];
 
             if (ModelState.IsValid)
             {

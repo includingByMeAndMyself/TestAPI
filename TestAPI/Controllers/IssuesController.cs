@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Timesheet.API.Models;
 using Timesheet.Domain.Interfaces.IService;
 
 namespace Timesheet.API.Controllers
@@ -7,17 +9,23 @@ namespace Timesheet.API.Controllers
     [Route("api/[controller]")]
     public class IssuesController : Controller
     {
-        public IssuesController(IIssuesService issuesService)
-        {
+        private readonly IIssuesService _issuesService;
+        private readonly IMapper _mapper;
 
+        public IssuesController(IIssuesService issuesService, IMapper mapper)
+        {
+            _issuesService = issuesService;
+            _mapper = mapper;
         }
         
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult<GetIssuesResponse> Get()
         {
-            
-
-            return Ok();
+            var issues = _issuesService.Get("includingByMeAndMyself", "TestAPI");
+            return new GetIssuesResponse
+            {
+                Issues = _mapper.Map<IssueDto[]>(issues)
+            };
         }
     }
 }

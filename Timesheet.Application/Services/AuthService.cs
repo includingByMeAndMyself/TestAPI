@@ -19,7 +19,7 @@ namespace Timesheet.BussinessLogic.Services
             _employeeRepository = employeeRepository;
         }
 
-        public string Login(string lastName)
+        public string Login(string lastName, string secret)
         {
             if (string.IsNullOrWhiteSpace(lastName))
             {
@@ -33,7 +33,6 @@ namespace Timesheet.BussinessLogic.Services
                 throw new NotFoundException($"Employee with last name {lastName}");
             }
 
-            var secret = "secret secret secret secret secret";
             var token = GenerateJwtToken(secret, employee);
 
             return token;

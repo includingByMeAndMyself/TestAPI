@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System;
 
-namespace Timesheet.Api.Models
+namespace Timesheet.API.Models
 {
     public class CreateTimeLogRequest
     {
