@@ -38,10 +38,13 @@ namespace Timesheet.API
 
             services.AddTransient<IAuthService, AuthService>();
             
-            services.AddTransient<ITimesheetRepository, TimesheetRepository>();
+            //services.AddTransient<ITimesheetRepository, TimesheetRepository>();
+            
+            services.AddTransient<ITimesheetRepository, DAL.MSSQL.Repositories.TimesheetRepository>();
             services.AddTransient<ITimesheetService, TimesheetService>();
             
-            services.AddTransient<IEmployeeRepository, DAL.CSV.Repositories.EmployeeRepository>();
+            //services.AddTransient<IEmployeeRepository, DAL.CSV.Repositories.EmployeeRepository>();
+            
             services.AddTransient<IEmployeeRepository, DAL.MSSQL.Repositories.EmployeeRepository>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             

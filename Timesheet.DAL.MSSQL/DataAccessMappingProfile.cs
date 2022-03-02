@@ -21,6 +21,9 @@ namespace Timesheet.DAL.MSSQL
             CreateMap<FreelancerEmployee, Entities.Employee>()
                 .IncludeBase<Employee, Entities.Employee>()
                 .ReverseMap();
+
+            CreateMap<TimeLog, Entities.TimeLog>()
+                .ReverseMap();
         }
     }
 }
