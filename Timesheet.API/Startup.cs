@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 using Timesheet.API.Models;
 using Timesheet.BussinessLogic.Services;
 using Timesheet.DAL.CSV.Infrastructure;
@@ -66,8 +67,16 @@ namespace Timesheet.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Timesheet API", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Timesheet API", Version = "v2" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Timesheet.API.xml");
+                c.IncludeXmlComments(filePath);
             });
+
+            services.AddOpenApiDocument();
+            
+            //services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,12 +85,22 @@ namespace Timesheet.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI v1");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "TestAPI v2");
+            });
 
+            app.UseOpenApi();
+
+            app.UseReDoc();
+
+            app.UseHttpsRedirection();
+            
             app.UseRouting();
 
             app.UseAuthorization();

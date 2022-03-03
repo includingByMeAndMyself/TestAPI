@@ -1,12 +1,12 @@
- using Moq;
- using NUnit.Framework;
+using Moq;
+using NUnit.Framework;
 using System;
 using Timesheet.BussinessLogic.Exceptions;
 using Timesheet.BussinessLogic.Services;
- using Timesheet.Domain.Interfaces.IRepository;
- using Timesheet.Domain.Models;
+using Timesheet.Domain.Interfaces.IRepository;
+using Timesheet.Domain.Models;
 
- namespace Timesheet.Tests
+namespace Timesheet.Tests
 {
     public class AuthServiceTests
     {
@@ -32,7 +32,7 @@ using Timesheet.BussinessLogic.Services;
                 .Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
-            
+
             //act
             var result = _service.Login(lastName, secret);
 
@@ -55,7 +55,7 @@ using Timesheet.BussinessLogic.Services;
             //act
             var token1 = _service.Login(lastName, secret);
             var token2 = _service.Login(lastName, secret);
-            
+
             //assert
             _employeeRepositoryMock.VerifyAll();
 
@@ -77,7 +77,7 @@ using Timesheet.BussinessLogic.Services;
 
             //assert
             _employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Never);
-            Assert.IsNull(result);  
+            Assert.IsNull(result);
         }
 
         [TestCase("TestUser")]
@@ -96,7 +96,7 @@ using Timesheet.BussinessLogic.Services;
 
             //assert
             _employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Once);
-            Assert.IsNull(result); 
+            Assert.IsNull(result);
         }
     }
 }
