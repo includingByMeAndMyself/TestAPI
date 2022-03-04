@@ -4,7 +4,7 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>987ceac1-e580-4a28-9552-53e4e1754a52</UserSecretsId>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<BaseOutputPath>D:\!учебные проекты\TestWebApi\TestAPI\bin\Debug\net5.0</BaseOutputPath>
+		<BaseOutputPath>$(ProjectPath)</BaseOutputPath>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,6 +14,13 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="ResourceModels\**" />
+	  <Content Remove="ResourceModels\**" />
+	  <EmbeddedResource Remove="ResourceModels\**" />
+	  <None Remove="ResourceModels\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -26,6 +33,8 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="NLog" Version="4.7.14" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
 		<PackageReference Include="NSwag.AspNetCore" Version="13.15.10" />
 		<PackageReference Include="NSwag.MSBuild" Version="13.15.10">
 			<PrivateAssets>all</PrivateAssets>
@@ -42,13 +51,8 @@
 		<ProjectReference Include="..\Timesheet.Itegrations.GitHub\Timesheet.Itegrations.GitHub.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="ResourceModels\" />
-	</ItemGroup>
-
 	<Target Name="NSwag" AfterTargets="PostBuildEvent">
-		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"
-			  Command="$(NSwagExe_Core31) aspnetcore2openapi /project:$(ProjectPath) /noBuild:true /outputType:OpenApi3 /output:swagger.json" />
+		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Core31) aspnetcore2openapi /project:$(ProjectPath) /noBuild:true /outputType:OpenApi3 /output:swagger.json" />
 		<Exec Command="$(NSwagExe_Core31) openapi2csclient /input:swagger.json /output:../Timesheet.API.ClientSDK/TimesheetAPI.cs" />
 	</Target>
 
