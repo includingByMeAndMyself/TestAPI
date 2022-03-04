@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.IO;
 using Timesheet.API.Models;
 using Timesheet.BussinessLogic.Services;
@@ -80,9 +81,10 @@ namespace Timesheet.API
 
             //services.AddSwaggerDocument();
 
-            var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<ControllerBase>>();
-            services.AddSingleton(typeof(ILogger), logger);
+            // NLog change to SeriLog
+            //var serviceProvider = services.BuildServiceProvider();
+            //var logger = serviceProvider.GetService<ILogger<ControllerBase>>();
+            //services.AddSingleton(typeof(ILogger), logger);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,14 +95,16 @@ namespace Timesheet.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSerilogRequestLogging();
+
             //app.UseSwagger();
-            
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI v1");
                 c.SwaggerEndpoint("/swagger/v2/swagger.json", "TestAPI v2");
-            });
-
+            });    
+            
             app.UseOpenApi();
 
             app.UseReDoc();

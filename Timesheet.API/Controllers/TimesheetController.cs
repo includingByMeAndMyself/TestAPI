@@ -28,9 +28,10 @@ namespace Timesheet.API.Controllers
         [HttpPost]
         public ActionResult<bool?> TrackTime(CreateTimeLogRequest request)
         {
-            var lastName = (string)HttpContext.Items["LastName"];
+            
+            var lastName = request.LastName;
 
-            _logger.LogInformation($"Пользователь {lastName} фиксирует рабочее время " + JsonConvert.SerializeObject(request, Formatting.Indented));
+            _logger.LogInformation("Пользователь" +$" {lastName} "+ "фиксирует рабочее время {@Request}", request);
 
             if (ModelState.IsValid)
             {
@@ -41,7 +42,7 @@ namespace Timesheet.API.Controllers
                 _logger.LogInformation($"Пользователь {lastName} успешно зафиксировал время ");
                 return Ok(result);
             }
-            
+             
             _logger.LogWarning("");
 
             return BadRequest();
