@@ -1,27 +1,28 @@
-﻿using Timesheet.Domain.Interfaces.IRepository;
+﻿using System;
+using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
-namespace Timesheet.Application.Services
+namespace Timesheet.BussinessLogic.Services
 {
     public class TimesheetService : ITimesheetService
     {
         private readonly ITimesheetRepository _timesheetRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public TimesheetService(ITimesheetRepository timesheetRepository)
+        public TimesheetService(ITimesheetRepository timesheetRepository, IEmployeeRepository employeeRepository)
         {
             _timesheetRepository = timesheetRepository;
+            _employeeRepository = employeeRepository;
         }
 
-        public bool TrackTime(TimeLog timeLog)
+        public bool TrackTime(TimeLog timeLog, string lastName)
         {
-            bool isValid = timeLog.WorkingHours > 0 
-                           && timeLog.WorkingHours <= 24
-                           && !string.IsNullOrWhiteSpace(timeLog.LastName);
+            var employee = _employeeRepository.Get(lastName);
 
-            isValid = UserSession.Sessions.Contains(timeLog.LastName);
+            bool isValid = employee != null ? employee.CheckInputLog(timeLog) : false;
 
-            if (isValid == false)
+            if (!isValid)
             {
                 return false;
             }
@@ -29,6 +30,6 @@ namespace Timesheet.Application.Services
             _timesheetRepository.Add(timeLog);
 
             return true;
-        } 
+        }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Timesheet.Domain.Models
 {
     public class FreelancerEmployee : Employee
     {
-        public FreelancerEmployee(string lastName, decimal salary) : base(lastName, salary)
+        public FreelancerEmployee(string lastName, decimal salary) : base(lastName, salary, Position.Freelancer)
         {
         }
         public override decimal CalculateBill(TimeLog[] timeLogs)
@@ -21,6 +19,13 @@ namespace Timesheet.Domain.Models
         public override string GetPersonalData(string delimeter)
         {
             return $"{LastName}{delimeter}{Salary}{delimeter}Фрилансер{delimeter}\n";
+        }
+
+        public override bool CheckInputLog(TimeLog timeLog)
+        {
+            bool isValid = base.CheckInputLog(timeLog);
+            isValid = timeLog.LastName == this.LastName && timeLog.Date > DateTime.Now.AddDays(-2) && isValid;
+            return isValid;
         }
     }
 }

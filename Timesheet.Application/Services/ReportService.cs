@@ -4,7 +4,7 @@ using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
-namespace Timesheet.Application.Services
+namespace Timesheet.BussinessLogic.Services
 {
     public class ReportService : IReportService
     {
@@ -19,7 +19,7 @@ namespace Timesheet.Application.Services
 
         public EmployeeReport GetEmployeeReport(string lastName)
         {
-            var employee = _employeeRepository.GetEmployee(lastName);
+            var employee = _employeeRepository.Get(lastName);
             var timeLogs = _timesheetRepository.GetTimeLogs(employee.LastName);
 
             if (timeLogs == null || timeLogs.Length == 0)

@@ -1,6 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Timesheet.Application.Services;
+using Timesheet.BussinessLogic.Services;
 using Timesheet.Domain.Interfaces.IRepository;
 using Timesheet.Domain.Models;
 
@@ -19,7 +19,7 @@ namespace Timesheet.Tests
             var staffEmployee = new StaffEmployee(lastName, salary);
          
             var employeeRepository = new Mock<IEmployeeRepository>();
-            employeeRepository.Setup(x => x.AddEmployee(staffEmployee)).Verifiable();
+            employeeRepository.Setup(x => x.Add(staffEmployee)).Verifiable();
 
             var service = new EmployeeService(employeeRepository.Object);
 
@@ -29,7 +29,7 @@ namespace Timesheet.Tests
 
             //assert
 
-            employeeRepository.Verify(x => x.AddEmployee(staffEmployee), Times.Once);
+            employeeRepository.Verify(x => x.Add(staffEmployee), Times.Once);
             Assert.IsTrue(result);
         }
 
@@ -55,7 +55,7 @@ namespace Timesheet.Tests
 
             //assert
 
-            employeeRepository.Verify(x => x.AddEmployee(It.IsAny<StaffEmployee>()), Times.Never);
+            employeeRepository.Verify(x => x.Add(It.IsAny<StaffEmployee>()), Times.Never);
             Assert.IsFalse(result);
         }
 

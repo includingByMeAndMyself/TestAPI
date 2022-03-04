@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheet.API.ResourceModels
+namespace Timesheet.API.Models
 {
-    public class LoginRequest
+    public class GetIssuesResponse
     {
-        public string LastName { get; set; }
+        public IssueDto[] Issues { get; set; }
     }
 }

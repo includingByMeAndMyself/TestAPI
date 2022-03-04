@@ -4,7 +4,7 @@ namespace Timesheet.Domain.Models
 {
     public class SuperiorEmployee : Employee
     {
-        public SuperiorEmployee(string lastName, decimal salary, decimal bonus) : base(lastName, salary)
+        public SuperiorEmployee(string lastName, decimal salary, decimal bonus) : base(lastName, salary, Position.Superior)
         {
             Bonus = bonus;
         }

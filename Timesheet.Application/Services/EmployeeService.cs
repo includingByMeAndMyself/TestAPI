@@ -2,7 +2,7 @@
 using Timesheet.Domain.Interfaces.IService;
 using Timesheet.Domain.Models;
 
-namespace Timesheet.Application.Services
+namespace Timesheet.BussinessLogic.Services
 {
     public class EmployeeService : IEmployeeService
     {
@@ -19,7 +19,7 @@ namespace Timesheet.Application.Services
 
             if (isValid)
             {
-                _emploeeyRepository.AddEmployee(employee);
+                _emploeeyRepository.Add(employee);
             }
 
             return isValid;

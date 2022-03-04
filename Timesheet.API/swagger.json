@@ -1,0 +1,476 @@
+{
+  "x-generator": "NSwag v13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v12.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login in timeshett api",
+        "operationId": "Auth_Login",
+        "requestBody": {
+          "x-name": "request",
+          "description": "Login request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "jwt token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FreelancerEmployee": {
+      "post": {
+        "tags": [
+          "FreelancerEmployee"
+        ],
+        "operationId": "FreelancerEmployee_Add",
+        "requestBody": {
+          "x-name": "freelancerEmployee",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreelancerEmployee"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Issues": {
+      "get": {
+        "tags": [
+          "Issues"
+        ],
+        "operationId": "Issues_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIssuesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Report": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "operationId": "Report_Get",
+        "parameters": [
+          {
+            "name": "lastName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEmployeeReportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/StaffEmployee": {
+      "post": {
+        "tags": [
+          "StaffEmployee"
+        ],
+        "operationId": "StaffEmployee_Add",
+        "requestBody": {
+          "x-name": "staffEmployee",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffEmployee"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SuperiorEmployee": {
+      "post": {
+        "tags": [
+          "SuperiorEmployee"
+        ],
+        "operationId": "SuperiorEmployee_Add",
+        "requestBody": {
+          "x-name": "SuperiorEmployee",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuperiorEmployee"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Timesheet": {
+      "post": {
+        "tags": [
+          "Timesheet"
+        ],
+        "operationId": "Timesheet_TrackTime",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTimeLogRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "extensions": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {}
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "description": "LoginRequest",
+        "additionalProperties": false,
+        "required": [
+          "lastName"
+        ],
+        "properties": {
+          "lastName": {
+            "type": "string",
+            "description": "User s Last Name",
+            "minLength": 1
+          }
+        }
+      },
+      "FreelancerEmployee": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Employee"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Employee": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salary": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          }
+        }
+      },
+      "Position": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Superior",
+          "Staff",
+          "Freelancer"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "GetIssuesResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "issues": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssueDto"
+            }
+          }
+        }
+      },
+      "IssueDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetEmployeeReportResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timeLogs": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TimeLogDto"
+            }
+          },
+          "totalHours": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bill": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "TimeLogDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "workingHours": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "StaffEmployee": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Employee"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "SuperiorEmployee": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Employee"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "bonus": {
+                "type": "number",
+                "format": "decimal"
+              }
+            }
+          }
+        ]
+      },
+      "CreateTimeLogRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "workingHours": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}
