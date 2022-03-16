@@ -11,7 +11,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Login in timeshett api",
+        "summary": "Login in timesheet api",
         "operationId": "Auth_Login",
         "requestBody": {
           "x-name": "request",

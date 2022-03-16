@@ -40,6 +40,7 @@ namespace Timesheet.API.Controllers
                 var result = _timesheetService.TrackTime(timeLog, lastName);
                 
                 _logger.LogInformation($"Пользователь {lastName} успешно зафиксировал время ");
+                
                 return Ok(result);
             }
              

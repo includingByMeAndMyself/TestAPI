@@ -53,7 +53,7 @@ namespace MyNamespace
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>
-        /// Login in timeshett api
+        /// Login in timesheet api
         /// </summary>
         /// <param name="request">Login request</param>
         /// <returns>jwt token</returns>
@@ -65,7 +65,7 @@ namespace MyNamespace
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Login in timeshett api
+        /// Login in timesheet api
         /// </summary>
         /// <param name="request">Login request</param>
         /// <returns>jwt token</returns>

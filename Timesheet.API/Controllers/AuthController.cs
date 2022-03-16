@@ -29,7 +29,7 @@ namespace Timesheet.API.Controllers
         }
 
         /// <summary>
-        /// Login in timeshett api
+        /// Login in timesheet api
         /// </summary>
         /// <param name="request">Login request</param>
         /// <returns>jwt token</returns>

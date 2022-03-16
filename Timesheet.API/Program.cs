@@ -42,7 +42,7 @@ namespace Timesheet.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-
                 });
+
     }
 }
